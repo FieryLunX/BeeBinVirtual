@@ -134,13 +134,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tara
       objectReference: {fileID: 0}
+    - target: {fileID: 2083305520721457845, guid: b9d7f721cbf5c9f48a9062a639e584cf, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 2652168310221199792, guid: b9d7f721cbf5c9f48a9062a639e584cf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2652168310221199792, guid: b9d7f721cbf5c9f48a9062a639e584cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2652168310221199792, guid: b9d7f721cbf5c9f48a9062a639e584cf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -542,7 +546,7 @@ Transform:
   m_GameObject: {fileID: 280010677}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13, y: -7.000001, z: -10}
+  m_LocalPosition: {x: 13, y: -7, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11806,7 +11810,7 @@ Transform:
   m_GameObject: {fileID: 387146943}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25, y: -7, z: -10}
+  m_LocalPosition: {x: 18, y: -7, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11822,14 +11826,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 387146943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2fba25a5cd15594e8f050a11e386c80, type: 3}
+  m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ConfineMode: 0
-  m_BoundingVolume: {fileID: 0}
   m_BoundingShape2D: {fileID: 1130096498}
-  m_ConfineScreenEdges: 1
-  m_Damping: 0
+  m_Damping: 0.5
+  m_MaxWindowSize: -1
+  m_Padding: 0
 --- !u!1001 &400060335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47522,6 +47525,7 @@ GameObject:
   - component: {fileID: 1285363470}
   - component: {fileID: 1285363471}
   - component: {fileID: 1285363472}
+  - component: {fileID: 1285363473}
   m_Layer: 7
   m_Name: Door
   m_TagString: Untagged
@@ -47577,7 +47581,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.67, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -47617,6 +47621,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1285363473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285363469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b9abb05a7249504bb1c40b49bb62608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneBuildIndex: 6
 --- !u!4 &1291553128 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6123470736947818007, guid: 321f63b8c5c5025449dccb9039efd32b, type: 3}
@@ -51532,7 +51549,7 @@ GameObject:
   - component: {fileID: 2018663945}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51557,7 +51574,7 @@ MonoBehaviour:
     m_Bits: 128
   interactableLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   rb: {fileID: 2018663944}
 --- !u!212 &2018663940
 SpriteRenderer:
@@ -51620,7 +51637,7 @@ Transform:
   m_GameObject: {fileID: 2018663937}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25, y: -7, z: 0}
+  m_LocalPosition: {x: 18, y: -7, z: 0}
   m_LocalScale: {x: 1.37, y: 1.62, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -51727,8 +51744,8 @@ Transform:
   m_GameObject: {fileID: 2041973212}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.20474, y: 0.0063162, z: 0}
-  m_LocalScale: {x: 3.2829907, y: 1.169644, z: 0.99848}
+  m_LocalPosition: {x: 0.20474, y: 0.15488, z: 0}
+  m_LocalScale: {x: 3.2829907, y: 1.5410644, z: 0.99848}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1285363470}
