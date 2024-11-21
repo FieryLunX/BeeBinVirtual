@@ -5,11 +5,19 @@ using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Character Attributes:")]
+    public float BASE_SPEED = 1.0f;
+
+    [Space]
+    [Header("Character statistics:")]
+    public Vector2 moveDirection;
     public float moveSpeed;
-    private Vector2 moveDirection;
     private Vector2 lastMoveDirection;
     private Animator animator;
     public LayerMask solidObjectsLayer;
+
+    [Space]
+    [Header("References:")]
     public Rigidbody2D rb;
 
     private void Awake()
@@ -20,36 +28,34 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         ProcessInput();
-        Animate();
-    }
-
-    void FixedUpdate()
-    {
         Move();
+        Animate();
     }
 
     void ProcessInput()
     {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
+        moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        moveSpeed = Mathf.Clamp(moveDirection.magnitude, 0.0f, 1.0f);
+        moveDirection.Normalize();
 
-        if ((moveX == 0 && moveY == 0) && moveDirection.x != 0 || moveDirection.y != 0)
+        if (moveDirection.x != 0 || moveDirection.y != 0)
         {
             lastMoveDirection = moveDirection;
         }
-
-        moveDirection = new Vector2(moveX, moveY).normalized;
     }
 
     void Move()
     {
-        rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+        rb.velocity = moveDirection * moveSpeed * BASE_SPEED;
     }
 
     void Animate()
     {
-        animator.SetFloat("moveX", moveDirection.x);
-        animator.SetFloat("moveY", moveDirection.y);
+        if(moveDirection != Vector2.zero)
+        {
+            animator.SetFloat("moveX", moveDirection.x);
+            animator.SetFloat("moveY", moveDirection.y);
+        }
         animator.SetFloat("moveMagnitude", moveDirection.magnitude);
         animator.SetFloat("lastMoveX", lastMoveDirection.x);
         animator.SetFloat("lastMoveY", lastMoveDirection.y);
@@ -61,7 +67,6 @@ public class PlayerMovement : MonoBehaviour
         {
             return false;
         }
-
         return true;
     }
 }
