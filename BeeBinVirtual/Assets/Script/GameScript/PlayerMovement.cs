@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 lastMoveDirection;
     private Animator animator;
     public LayerMask solidObjectsLayer;
+    public LayerMask interactableLayer;
 
     [Space]
     [Header("References:")]
@@ -25,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
-    void Update()
+    public void HandleUpdate()
     {
         ProcessInput();
         Move();
@@ -42,6 +43,9 @@ public class PlayerMovement : MonoBehaviour
         {
             lastMoveDirection = moveDirection;
         }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+            Interact();
     }
 
     void Move()
@@ -61,9 +65,21 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("lastMoveY", lastMoveDirection.y);
     }
 
+    void Interact()
+    {
+        var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        var interactPos = transform.position + facingDir;
+
+        var collider = Physics2D.OverlapCircle(interactPos, 0.2f, interactableLayer);
+        if (collider != null) 
+        {
+            collider.GetComponent<Interactable>()?.Interact();
+        }
+    }
+
     private bool IsWalkable(Vector3 targetPos)
     {
-        if (Physics2D.OverlapCircle(targetPos, 0f, solidObjectsLayer) != null)
+        if (Physics2D.OverlapCircle(targetPos, 0f, solidObjectsLayer | interactableLayer) != null)
         {
             return false;
         }
